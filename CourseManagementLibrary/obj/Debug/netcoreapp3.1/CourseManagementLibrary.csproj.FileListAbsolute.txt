@@ -1,0 +1,10 @@
+C:\Users\USER\source\repos\CourseManagement\CourseManagementLibrary\bin\Debug\netcoreapp3.1\CourseManagementLibrary.deps.json
+C:\Users\USER\source\repos\CourseManagement\CourseManagementLibrary\bin\Debug\netcoreapp3.1\CourseManagementLibrary.dll
+C:\Users\USER\source\repos\CourseManagement\CourseManagementLibrary\bin\Debug\netcoreapp3.1\CourseManagementLibrary.pdb
+C:\Users\USER\source\repos\CourseManagement\CourseManagementLibrary\obj\Debug\netcoreapp3.1\CourseManagementLibrary.csproj.AssemblyReference.cache
+C:\Users\USER\source\repos\CourseManagement\CourseManagementLibrary\obj\Debug\netcoreapp3.1\CourseManagementLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\USER\source\repos\CourseManagement\CourseManagementLibrary\obj\Debug\netcoreapp3.1\CourseManagementLibrary.AssemblyInfoInputs.cache
+C:\Users\USER\source\repos\CourseManagement\CourseManagementLibrary\obj\Debug\netcoreapp3.1\CourseManagementLibrary.AssemblyInfo.cs
+C:\Users\USER\source\repos\CourseManagement\CourseManagementLibrary\obj\Debug\netcoreapp3.1\CourseManagementLibrary.csproj.CoreCompileInputs.cache
+C:\Users\USER\source\repos\CourseManagement\CourseManagementLibrary\obj\Debug\netcoreapp3.1\CourseManagementLibrary.dll
+C:\Users\USER\source\repos\CourseManagement\CourseManagementLibrary\obj\Debug\netcoreapp3.1\CourseManagementLibrary.pdb
