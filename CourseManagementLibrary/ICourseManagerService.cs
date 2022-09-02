@@ -8,11 +8,11 @@ namespace CourseManagementLibrary
     {
         List<Group> Groups { get; set; }
         public void AddGroup(Group group);
-        public void EditGroup(string groupNo);
+        public string EditGroup(string no);
         public void AddStudent(Student student);
         public void GetStudentsByGroupNo(string groupNo);
         public void GetAllStudents(Student student);
-        public void FindGroupByNo(string groupNo);
+        public string FindGroupByNo(string groupNo);
         public void RemoveGroupByNo(string groupNo);
         public void Search(string value);
     }

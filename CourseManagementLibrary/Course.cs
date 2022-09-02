@@ -10,43 +10,85 @@ namespace CourseManagementLibrary
 
         public void AddGroup(Group group)
         {
-            Groups.Add(group);
+            if (group.Limit > Groups.Count)
+            {
+                Groups.Add(group);
+            } 
+        }
+
+        public static bool CheckGroupNo(string no)
+        {
+            Group group = new Group();
+            if (no != group.No)
+            {
+                return true;
+            }
+            return false;
         }
 
         public void AddStudent(Student student)
         {
-           List<Student> Students = new List<Student>();
-           Students.Add(student);
+            AddStudent(student);
         }
 
-        public void EditGroup(string groupNo)
+        public string EditGroup(string no)
         {
-            
+            Group group = new Group();
+
+            if (no != group.No)
+            {
+                group.No = no;
+            }
+            return group.No;
         }
 
-        public void FindGroupByNo(string groupNo)
+        public string FindGroupByNo(string no)
         {
-            
+            Group group = new Group();
+            if (no == group.No)
+            {
+                return group.No;
+            }
+            return "sehv";
         }
 
         public void GetAllStudents(Student student)
         {
-            
+
+            //yeniden bax
+            student.Show();
         }
 
-        public void GetStudentsByGroupNo(string groupNo)
+        public void GetStudentsByGroupNo(string no)
         {
-            
+            Group group = new Group();
+            Student student = new Student();
+            if (no == group.No)
+            {
+               student.Show();
+            }
         }
 
-        public void RemoveGroupByNo(string groupNo)
+        public void RemoveGroupByNo(string no)
         {
-            
+            Group group = new Group();
+            if (no == group.No)
+            {
+                Groups.Remove(group);
+            }
         }
 
         public void Search(string value)
         {
-            
+            value = value.ToLower();
+            Student student = new Student();
+
+                string fullName = student.Name + " " + student.Surname;
+
+            if (fullName.ToLower().Contains(value))
+            {
+                student.Show();
+            }
         }
     }
 }
