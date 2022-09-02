@@ -6,7 +6,7 @@ namespace CourseManagementLibrary
 {
     public interface ICourseManagerService
     {
-        List<Group> Groups { get; set; }
+        List<Group> Groups { get; }
         public void AddGroup(Group group);
         public string EditGroup(string no);
         public void AddStudent(Student student);

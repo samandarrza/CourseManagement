@@ -6,8 +6,10 @@ namespace CourseManagementLibrary
 {
     public class Course : ICourseManagerService
     {
-        public List<Group> Groups { get; set; }
 
+        private List<Group> _groups = new List<Group>();
+        public List<Group> Groups { get => _groups; }
+        
         public void AddGroup(Group group)
         {
             if (group.Limit > Groups.Count)
@@ -89,6 +91,11 @@ namespace CourseManagementLibrary
             {
                 student.Show();
             }
+        }
+        public void ShowGroup()
+        {
+            Group group = new Group();
+            group.Show();
         }
     }
 }

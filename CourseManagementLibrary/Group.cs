@@ -11,7 +11,21 @@ namespace CourseManagementLibrary
         public bool IsOnline;
         private byte _limit;
 
-        public byte Limit {get { return _limit;}}
+        public byte Limit
+        {
+            get
+            {
+                return _limit;
+            }
+            set
+            {
+                _limit = value;
+            }
+        }
+        public Group()
+        {
+            Limit = 15;
+        }
 
         List<Student> Students = new List<Student>(0);
 
@@ -29,6 +43,11 @@ namespace CourseManagementLibrary
                 return _limit = 15;
             else
                 return _limit = 10;
+        }
+
+        public void Show()
+        {
+            Console.WriteLine($"{No} {Category}");
         }
 
     }

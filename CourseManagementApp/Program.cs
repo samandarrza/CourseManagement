@@ -9,8 +9,6 @@ namespace CourseManagementApp
         {
             Course course = new Course();
 
-
-
             string opt;
 
             do
@@ -36,11 +34,17 @@ namespace CourseManagementApp
                 switch (opt)
                 {
                     case "1.1":
-                        Group group = new Group();
-                        course.AddGroup(group);
+                        course.ShowGroup();
                         break;
                     case "1.2":
-                        //
+                        Console.WriteLine("No: ");
+                        string no = Console.ReadLine();
+                        Console.WriteLine("Category: ");
+                        string category = Console.ReadLine();
+                        Group group = new Group();
+                        group.No = no;
+                        group.Category = category;
+                        course.AddGroup(group);
                         break;
                     case "1.3":
                         //
@@ -52,7 +56,8 @@ namespace CourseManagementApp
                         //
                         break;
                     case "2.3":
-                        //
+                        Student student = new Student();
+                        course.AddStudent(student);
                         break;
                     case "2.4":
                         //
