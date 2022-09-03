@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32804.467
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseManagementApp", "CourseManagementApp\CourseManagementApp.csproj", "{3D2D1181-CDED-4859-83D6-BFDF9D5A58BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseManagementApp", "CourseManagementApp\CourseManagementApp.csproj", "{3D2D1181-CDED-4859-83D6-BFDF9D5A58BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseManagementLibrary", "CourseManagementLibrary\CourseManagementLibrary.csproj", "{C31D587F-3372-4BA4-9DB9-BA90664AA78A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseManagementLibrary", "CourseManagementLibrary\CourseManagementLibrary.csproj", "{C31D587F-3372-4BA4-9DB9-BA90664AA78A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

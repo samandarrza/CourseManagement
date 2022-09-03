@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Xml.Linq;
 
 namespace CourseManagementLibrary
 {
@@ -12,90 +14,85 @@ namespace CourseManagementLibrary
         
         public void AddGroup(Group group)
         {
-            if (group.Limit > Groups.Count)
+            if (!CheckGroupNo(group.No))
             {
-                Groups.Add(group);
-            } 
+                _groups.Add(group);
+            }           
         }
 
-        public static bool CheckGroupNo(string no)
+        public bool CheckGroupNo(string no)
         {
-            Group group = new Group();
-            if (no != group.No)
+            foreach (var item in Groups)
             {
-                return true;
+                if (item.No == no)
+                    return true;
             }
             return false;
         }
 
         public void AddStudent(Student student)
         {
-            AddStudent(student);
+            FindGroupByNo(student.GroupNo).AddStudent(student);
         }
 
-        public string EditGroup(string no)
+        public void EditGroup(string oldNo, string newNo)
         {
-            Group group = new Group();
-
-            if (no != group.No)
+            for (int i = 0; i < Groups.Count; i++)
             {
-                group.No = no;
+                if (oldNo == Groups[i].No)
+                {
+                    Groups[i].No = newNo;
+                }
             }
-            return group.No;
         }
 
-        public string FindGroupByNo(string no)
+        public Group FindGroupByNo(string no)
         {
-            Group group = new Group();
-            if (no == group.No)
+            for (int i = 0; i < Groups.Count; i++)
             {
-                return group.No;
+                if (no == Groups[i].No)
+                    return Groups[i];
             }
-            return "sehv";
+            return null;
         }
 
-        public void GetAllStudents(Student student)
+        public void GetAllStudents()
         {
-
-            //yeniden bax
-            student.Show();
-        }
-
-        public void GetStudentsByGroupNo(string no)
-        {
-            Group group = new Group();
-            Student student = new Student();
-            if (no == group.No)
+            for (int i = 0; i < Groups.Count; i++)
             {
-               student.Show();
+                Groups[i].ShowAllStudent();
+            }
+            
+        }
+
+        public void GetStudentsByGroupNo(string groupno)
+        {
+            for (int i = 0; i < Groups.Count; i++)
+            {
+                if (groupno == Groups[i].No)
+                {
+                    Groups[i].ShowStudentByGroup(groupno);
+                }   
             }
         }
 
         public void RemoveGroupByNo(string no)
         {
-            Group group = new Group();
-            if (no == group.No)
+            for (int i = 0; i < Groups.Count; i++)
             {
-                Groups.Remove(group);
+                if (Groups[i].No == no)
+                {
+                    _groups.Remove(Groups[i]);
+                }
             }
         }
 
         public void Search(string value)
         {
-            value = value.ToLower();
-            Student student = new Student();
-
-                string fullName = student.Name + " " + student.Surname;
-
-            if (fullName.ToLower().Contains(value))
+            for (int i = 0; i < Groups.Count; i++)
             {
-                student.Show();
+                _groups[i].Search(value);
             }
-        }
-        public void ShowGroup()
-        {
-            Group group = new Group();
-            group.Show();
         }
     }
 }

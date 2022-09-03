@@ -11,7 +11,7 @@ namespace CourseManagementLibrary
         public string GroupNo;  //Telebenin qrup nomresi
         public string Type;     //Telebenin novu
 
-        public void Show()
+        public void ShowStd()
         {
             Console.WriteLine($"{Name} {Surname} - {GroupNo} ({Type})");
         }
