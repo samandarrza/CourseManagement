@@ -1,4 +1,5 @@
 ﻿using CourseManagementLibrary;
+using CourseManagementLibrary.Enums;
 using System;
 
 namespace CourseManagementApp
@@ -27,15 +28,7 @@ namespace CourseManagementApp
                         }
                         break;
                     case "1.2":
-                        Console.WriteLine("Yeni qrup yarat");
-                        Console.Write("Qrup nomresi: ");
-                        string no = Console.ReadLine();
-                        Console.Write("Category: ");
-                        string category = Console.ReadLine();
-                        Group group = new Group();
-                        group.No = no;
-                        group.Category = category;
-                        course.AddGroup(group);
+                        AddGroup(course);
                         break;
                     case "1.3":
                         Console.WriteLine("Qrup uzerinde duzelis et");
@@ -111,6 +104,56 @@ namespace CourseManagementApp
             Console.WriteLine(" 2.5 - Group sil");
             Console.WriteLine(" 0 - Menudan cix");
             Console.WriteLine("===============================");
+        }
+
+        static void AddGroup(Course course)
+        {
+            Console.WriteLine("Yeni qrup yarat");
+            Console.Write("Qrup nomresi: ");
+            string no;
+            bool hasNo = false;
+            bool checkNo = true;
+            do
+            {
+                if (hasNo == true)
+                    Console.WriteLine("Bu adda qrup var!");
+                if (checkNo == false)
+                    Console.WriteLine("1 boyuk herf ve 3 reqemden ibaret qrup adi daxil edin!");
+                no = Console.ReadLine();
+                hasNo = course.HasGroupNo(no);
+                checkNo = Course.CheckGroupNo(no);
+            } while (hasNo || !checkNo);
+            string category;
+            do
+            {
+                Console.WriteLine("Asagidaki kateqoriyalardan birini secin: ");
+                foreach (var item in Enum.GetNames(typeof(CategoryType)))
+                {
+                    Console.WriteLine(item);
+                }
+                category = Console.ReadLine();
+
+            } while (!Enum.IsDefined(typeof(CategoryType), category));
+            CategoryType categoryType = Enum.Parse<CategoryType>(category);
+
+            Console.Write("Qrup veziyyeti: ");
+            string isOnline;
+            do
+            {
+                Console.WriteLine("Asagidaki kateqoriyalardan birini secin: ");
+                foreach (var item in Enum.GetNames(typeof(OnlineType)))
+                {
+                    Console.WriteLine(item);
+                }
+                isOnline = Console.ReadLine();
+
+            } while (!Enum.IsDefined(typeof(OnlineType), isOnline));
+            OnlineType onlineType = Enum.Parse<OnlineType>(isOnline);
+            Group group = new Group();
+            group.No = no;
+            group.Category = categoryType;
+            group.IsOnline = onlineType;
+            course.AddGroup(group);
         }
     }
 }

@@ -4,10 +4,9 @@ using System.Text;
 
 namespace CourseManagementLibrary.Enums
 {
-    public enum CategoryType:byte
+    public enum OnlineType:byte
     {
-        Programing,
-        System,
-        Desing
+        Online,
+        Offline
     }
 }

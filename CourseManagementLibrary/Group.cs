@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseManagementLibrary.Enums;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -8,25 +9,21 @@ namespace CourseManagementLibrary
     public class Group
     {
         public string No;
-        public string Category;
-        public bool IsOnline;
+        public CategoryType Category;
+        public OnlineType IsOnline;
         private byte _limit;
 
         List<Student> Students = new List<Student>(0);
 
         public void AddStudent(Student student)
         {
-            if (Students.Count >= CheckLimit(IsOnline) || student.GroupNo != No)
-            {
-                Console.WriteLine("Telebe yaradila bilmedi");
-            }
-            Console.WriteLine("Telebe yaradildi");
-                Students.Add(student);
+            if (Students.Count <= CheckLimit() || student.GroupNo == No)
+                Students.Add(student);       
         }
 
-        public byte CheckLimit(bool IsOnline)
+        public byte CheckLimit()
         {
-            if (IsOnline)
+            if (IsOnline == OnlineType.Online)
                 return _limit = 15;
             else
                 return _limit = 10;
@@ -34,7 +31,7 @@ namespace CourseManagementLibrary
 
         public void Show()
         {
-            Console.WriteLine($"{No} {Category}");
+            Console.WriteLine($"{No} - {Category} ({IsOnline})");
         }
 
         public void ShowAllStudent()
@@ -66,12 +63,10 @@ namespace CourseManagementLibrary
 
                 if (fullName.ToLower().Contains(value) 
                     ||Students[i].GroupNo.ToLower().Contains(value) 
-                    ||Students[i].Type.ToLower().Contains(value) 
-                    ||Category.ToLower().Contains(value))
+                    ||Students[i].Type.ToLower().Contains(value))
                 {
                     Students[i].ShowStd();
                 }
-
             }
         }
 

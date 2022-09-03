@@ -14,13 +14,13 @@ namespace CourseManagementLibrary
         
         public void AddGroup(Group group)
         {
-            if (!CheckGroupNo(group.No))
+            if (!HasGroupNo(group.No) && CheckGroupNo(group.No))
             {
                 _groups.Add(group);
             }           
         }
 
-        public bool CheckGroupNo(string no)
+        public bool HasGroupNo(string no)
         {
             foreach (var item in Groups)
             {
@@ -29,6 +29,20 @@ namespace CourseManagementLibrary
             }
             return false;
         }
+
+        public static bool CheckGroupNo(string groupNo)
+        {
+            if (String.IsNullOrEmpty(groupNo) || !char.IsLetter(groupNo[0]) || !char.IsUpper(groupNo[0]) || groupNo.Length != 4)
+                return false;
+
+            for (int i = 1; i < groupNo.Length; i++)
+            {
+                if (!Char.IsDigit(groupNo[i]))
+                    return false;
+            }
+            return true;
+        }
+
 
         public void AddStudent(Student student)
         {
