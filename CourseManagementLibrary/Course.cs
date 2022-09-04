@@ -45,6 +45,7 @@ namespace CourseManagementLibrary
         }
         public void AddStudent(Student student)
         {
+
             FindGroupByNo(student.GroupNo).AddStudent(student);
         }
         public static bool CheckGroupNo2(string groupNo)

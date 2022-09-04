@@ -1,6 +1,7 @@
 ﻿using CourseManagementLibrary;
 using CourseManagementLibrary.Enums;
 using System;
+using System.Reflection.Metadata;
 
 namespace CourseManagementApp
 {
@@ -37,7 +38,7 @@ namespace CourseManagementApp
                         course.GetAllStudents();
                         break;
                     case "2.3":
-                        AddStudent(course);
+                        AddStudent(course); //yeniden bax
                         break;
                     case "2.4":
                         Search(course);
@@ -268,19 +269,6 @@ namespace CourseManagementApp
         static void AddStudent(Course course)
         {
             Console.WriteLine("Telebe elave et");
-            string name;
-            do
-            {
-                Console.Write("Ad: ");
-                name = Console.ReadLine();
-            } while (!name.IsContainsLetter());
-            string surmane;
-            do
-            {
-                Console.Write("Soyad: ");
-                surmane = Console.ReadLine();
-            } while (!surmane.IsContainsLetter());
-
             Console.Write("Qrup nomresi: ");
             string no;
             bool hasNo = true;
@@ -300,6 +288,28 @@ namespace CourseManagementApp
                 hasNo = course.HasGroupNo(no);
                 checkNo = Course.CheckGroupNo(no);
             } while (!hasNo || !checkNo);
+
+            Group StudentGroup = course.FindGroupByNo(no);
+            if (StudentGroup.Students.Count == StudentGroup.CheckLimit())
+            {
+                Console.WriteLine("Qrup doludur!");
+                return;
+            }
+
+            string name;
+            do
+            {
+                Console.Write("Ad: ");
+                name = Console.ReadLine();
+            } while (!name.IsContainsLetter());
+            string surmane;
+            do
+            {
+                Console.Write("Soyad: ");
+                surmane = Console.ReadLine();
+            } while (!surmane.IsContainsLetter());
+
+            
 
             Console.Write("Qrup tipi: ");
             string warranty;

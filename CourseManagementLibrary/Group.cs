@@ -13,27 +13,25 @@ namespace CourseManagementLibrary
         public OnlineType IsOnline;
         private byte _limit;
 
-        List<Student> Students = new List<Student>(0);
+        public byte Limit { get => _limit; }
+
+        public List<Student> Students = new List<Student>(0);
 
         public void AddStudent(Student student)
         {
-            if (Students.Count == CheckLimit(_limit) || student.GroupNo != No)
-            {
-                Console.WriteLine("Limit dolub.");
-            }
-            else
+            if (Students.Count != CheckLimit() || student.GroupNo == No)
             {
                 Students.Add(student);
             }
-            
         }
-
-        public byte CheckLimit(byte value)
+        public byte CheckLimit()
         {
             if (IsOnline == OnlineType.Online)
-                return value = 5;
-            else
-                return value = 3;
+                _limit = 2;
+            else if (IsOnline == OnlineType.Offline)
+                _limit = 1;
+
+            return _limit;
         }
 
         public void Show()
