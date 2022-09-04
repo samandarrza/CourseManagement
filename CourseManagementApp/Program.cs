@@ -38,7 +38,7 @@ namespace CourseManagementApp
                         course.GetAllStudents();
                         break;
                     case "2.3":
-                        AddStudent(course); //yeniden bax
+                        AddStudent(course);
                         break;
                     case "2.4":
                         Search(course);
