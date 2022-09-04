@@ -43,23 +43,32 @@ namespace CourseManagementLibrary
             }
             return true;
         }
-
-
         public void AddStudent(Student student)
         {
             FindGroupByNo(student.GroupNo).AddStudent(student);
         }
+        public static bool CheckGroupNo2(string groupNo)
+        {
+            if (String.IsNullOrEmpty(groupNo) || groupNo.Length != 3)
+                return false;
 
-        public byte CheckLimit(byte value)
+            for (int i = 0; i < groupNo.Length; i++)
+            {
+                if (!Char.IsDigit(groupNo[i]))
+                    return false;
+            }
+            return true;
+        }
+        public void EditGroup2(string oldNo, string newNo)
         {
             for (int i = 0; i < Groups.Count; i++)
             {
-                if (Groups[i].IsOnline == OnlineType.Online)
-                    return value = 2; 
+                if (HasGroupNo(oldNo) && CheckGroupNo2(newNo))
+                {
+                    _groups[i].No = oldNo[0] + newNo;
+                }
             }
-            return value = 1;
         }
-
         public void EditGroup(string oldNo, string newNo)
         {
             for (int i = 0; i < Groups.Count; i++)

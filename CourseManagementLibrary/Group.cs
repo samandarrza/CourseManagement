@@ -31,9 +31,9 @@ namespace CourseManagementLibrary
         public byte CheckLimit(byte value)
         {
             if (IsOnline == OnlineType.Online)
-                return value = 2;
+                return value = 5;
             else
-                return value = 1;
+                return value = 3;
         }
 
         public void Show()

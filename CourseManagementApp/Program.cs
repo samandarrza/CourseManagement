@@ -40,11 +40,7 @@ namespace CourseManagementApp
                         AddStudent(course);
                         break;
                     case "2.4":
-                        //
-                        Console.WriteLine("Umumi axtaris");
-                        Console.Write("Axtardiginiz sozu daxil edin: ");
-                        string wantedValue = Console.ReadLine();
-                        course.Search(wantedValue);
+                        Search(course);
                         break;
                     case "2.5":
                         DeleteGroup(course);
@@ -133,6 +129,34 @@ namespace CourseManagementApp
         }
         static void EditGroup(Course course)
         {
+            string opt2;
+            do
+            {
+                Console.WriteLine("=====Course Management App=====");
+                Console.WriteLine("1. Qrup adini tam deyis");
+                Console.WriteLine("2. Qrup adinin reqemlerini deyis");
+                Console.WriteLine("0. Geri don");
+                Console.WriteLine("===============================");
+                Console.WriteLine("Secim edin");
+                opt2 = Console.ReadLine();
+                switch (opt2)
+                {
+                    case "1":
+                        EditGrp1(course);
+                        break;
+                    case "2":
+                        EditGrp2(course);
+                        break;
+                    case "0":
+                        Console.WriteLine("Geri dön");
+                        break;
+                    default:
+                        break;
+                }
+            } while (opt2 != "0");
+        }
+        static void EditGrp1(Course course)
+        {
             Console.WriteLine("Qrup uzerinde duzelis et");
             Console.Write("Kohne qrup nomresi daxil edin: ");
             string oldNo;
@@ -173,6 +197,49 @@ namespace CourseManagementApp
                 checkNewNo = Course.CheckGroupNo(newNo);
             } while (hasNewNo || !checkNewNo);
             course.EditGroup(oldNo, newNo);
+        }
+        static void EditGrp2(Course course)
+        {
+            Console.WriteLine("Qrup uzerinde duzelis et");
+            Console.Write("Kohne qrup nomresi daxil edin: ");
+            string oldNo;
+            bool hasOldNo = true;
+            bool checkOldNo = true;
+            do
+            {
+                if (checkOldNo == false)
+                {
+                    Console.WriteLine("1 boyuk herf ve 3 reqemden ibaret qrup adi daxil edin!");
+                }
+                else if (hasOldNo == false)
+                {
+                    Console.WriteLine("Bu adda qrup yoxdur!");
+                    return;
+                }
+                oldNo = Console.ReadLine();
+                hasOldNo = course.HasGroupNo(oldNo);
+                checkOldNo = Course.CheckGroupNo(oldNo);
+            } while (!hasOldNo || !checkOldNo);
+            Console.Write("Yeni qrup nomresinin reqemlerini daxil edin: ");
+            string newNo;
+            bool hasNewNo = false;
+            bool checkNewNo = true;
+            do
+            {
+                if (checkNewNo == false)
+                {
+                    Console.WriteLine("3 reqemli eded daxil edin!");
+                }
+                else if (hasNewNo == true)
+                {
+                    Console.WriteLine("Bu adda qrup var!");
+                    return;
+                }
+                newNo = Console.ReadLine();
+                hasNewNo = course.HasGroupNo(newNo);
+                checkNewNo = Course.CheckGroupNo2(newNo);
+            } while (hasNewNo || !checkNewNo);
+            course.EditGroup2(oldNo, newNo);
         }
         static void StudentsByGroupNo(Course course)
         {
@@ -256,6 +323,13 @@ namespace CourseManagementApp
                 Warranty = warrantyType
             };
             course.AddStudent(student);
+        }
+        static void Search(Course course)
+        {
+            Console.WriteLine("Umumi axtaris");
+            Console.Write("Axtardiginiz sozu daxil edin: ");
+            string wantedValue = Console.ReadLine();
+            course.Search(wantedValue);
         }
         static void DeleteGroup(Course course)
         {
