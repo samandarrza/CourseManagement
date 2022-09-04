@@ -17,16 +17,23 @@ namespace CourseManagementLibrary
 
         public void AddStudent(Student student)
         {
-            if (Students.Count <= CheckLimit() || student.GroupNo == No)
-                Students.Add(student);       
+            if (Students.Count == CheckLimit(_limit) || student.GroupNo != No)
+            {
+                Console.WriteLine("Limit dolub.");
+            }
+            else
+            {
+                Students.Add(student);
+            }
+            
         }
 
-        public byte CheckLimit()
+        public byte CheckLimit(byte value)
         {
             if (IsOnline == OnlineType.Online)
-                return _limit = 15;
+                return value = 2;
             else
-                return _limit = 10;
+                return value = 1;
         }
 
         public void Show()
@@ -60,10 +67,12 @@ namespace CourseManagementLibrary
             for (int i = 0; i < Students.Count; i++)
             {
                 string fullName = Students[i].Name +" "+ Students[i].Surname;
+                string[] category = Enum.GetNames(typeof(CategoryType));
+                string[] online = Enum.GetNames(typeof(OnlineType));
+                string[] warranty = Enum.GetNames(typeof(WarrantyType));
 
-                if (fullName.ToLower().Contains(value) 
-                    ||Students[i].GroupNo.ToLower().Contains(value) 
-                    ||Students[i].Type.ToLower().Contains(value))
+                if (fullName.ToLower().Contains(value) || Students[i].GroupNo.ToLower().Contains(value)
+                    || category[i].ToLower().Contains(value)|| online[i].ToLower().Contains(value) || warranty[i].ToLower().Contains(value))
                 {
                     Students[i].ShowStd();
                 }

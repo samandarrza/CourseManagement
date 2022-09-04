@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseManagementLibrary.Enums;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -49,17 +50,26 @@ namespace CourseManagementLibrary
             FindGroupByNo(student.GroupNo).AddStudent(student);
         }
 
+        public byte CheckLimit(byte value)
+        {
+            for (int i = 0; i < Groups.Count; i++)
+            {
+                if (Groups[i].IsOnline == OnlineType.Online)
+                    return value = 2; 
+            }
+            return value = 1;
+        }
+
         public void EditGroup(string oldNo, string newNo)
         {
             for (int i = 0; i < Groups.Count; i++)
             {
-                if (oldNo == Groups[i].No)
+                if (HasGroupNo(oldNo) && CheckGroupNo(newNo))
                 {
-                    Groups[i].No = newNo;
+                    _groups[i].No = newNo;
                 }
             }
         }
-
         public Group FindGroupByNo(string no)
         {
             for (int i = 0; i < Groups.Count; i++)

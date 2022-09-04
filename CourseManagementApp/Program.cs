@@ -10,7 +10,7 @@ namespace CourseManagementApp
         {
             Course course = new Course();
             string opt;
-
+            
             do
             {
                 ShowMenu();
@@ -21,51 +21,23 @@ namespace CourseManagementApp
                 switch (opt)
                 {
                     case "1.1":
-                        Console.WriteLine("Qruplarin siyahisi");
-                        for (int i = 0; i < course.Groups.Count; i++)
-                        {
-                            course.Groups[i].Show();
-                        }
+                        ShowGroup(course);
                         break;
                     case "1.2":
                         AddGroup(course);
                         break;
                     case "1.3":
-                        Console.WriteLine("Qrup uzerinde duzelis et");
-                        Console.Write("Kohne qrup nomresi daxil edin: ");
-                        string oldNo = Console.ReadLine();
-                        Console.Write("Yeni qrup nomresi daxil edin: ");
-                        string newNo = Console.ReadLine();
-                        course.EditGroup(oldNo, newNo);
+                        EditGroup(course);
                         break;
                     case "2.1":
-                        Console.WriteLine("Qrupdaki telebelerin siyahisi");
-                        Console.Write("Qrup nomresi: ");
-                        string wantedNo = Console.ReadLine();
-                        course.GetStudentsByGroupNo(wantedNo);
+                        StudentsByGroupNo(course);
                         break;
                     case "2.2":
                         Console.WriteLine("Butun telebelerin siyahisi");
                         course.GetAllStudents();
                         break;
                     case "2.3":
-                        Console.WriteLine("Telebe elave et");
-                        Console.Write("Ad: ");
-                        string name = Console.ReadLine();
-                        Console.Write("Soyad: ");
-                        string surmane = Console.ReadLine();
-                        Console.Write("Qrup nomresi: ");
-                        string groupNo = Console.ReadLine();
-                        Console.Write("Qrup tipi: ");
-                        string type = Console.ReadLine();
-                        Student student = new Student()
-                        {
-                            Name = name,
-                            Surname = surmane,
-                            GroupNo = groupNo,
-                            Type = type
-                        };
-                        course.AddStudent(student);
+                        AddStudent(course);
                         break;
                     case "2.4":
                         //
@@ -75,10 +47,7 @@ namespace CourseManagementApp
                         course.Search(wantedValue);
                         break;
                     case "2.5":
-                        Console.WriteLine("Qrup sil");
-                        Console.Write("Qrup nomresi daxil edin: ");
-                        string delNo = Console.ReadLine();
-                        course.RemoveGroupByNo(delNo);
+                        DeleteGroup(course);
                         break;
                     case "0":
                         Console.WriteLine("Programdan cixdi!");
@@ -105,7 +74,14 @@ namespace CourseManagementApp
             Console.WriteLine(" 0 - Menudan cix");
             Console.WriteLine("===============================");
         }
-
+        static void ShowGroup(Course course)
+        {
+            Console.WriteLine("Qruplarin siyahisi");
+            for (int i = 0; i < course.Groups.Count; i++)
+            {
+                course.Groups[i].Show();
+            }
+        }
         static void AddGroup(Course course)
         {
             Console.WriteLine("Yeni qrup yarat");
@@ -154,6 +130,156 @@ namespace CourseManagementApp
             group.Category = categoryType;
             group.IsOnline = onlineType;
             course.AddGroup(group);
+        }
+        static void EditGroup(Course course)
+        {
+            Console.WriteLine("Qrup uzerinde duzelis et");
+            Console.Write("Kohne qrup nomresi daxil edin: ");
+            string oldNo;
+            bool hasOldNo = true;
+            bool checkOldNo = true;
+            do
+            {
+                if (checkOldNo == false)
+                {
+                    Console.WriteLine("1 boyuk herf ve 3 reqemden ibaret qrup adi daxil edin!");
+                }
+                else if (hasOldNo == false)
+                {
+                    Console.WriteLine("Bu adda qrup yoxdur!");
+                    return;
+                }
+                oldNo = Console.ReadLine();
+                hasOldNo = course.HasGroupNo(oldNo);
+                checkOldNo = Course.CheckGroupNo(oldNo);
+            } while (!hasOldNo || !checkOldNo);
+            Console.Write("Yeni qrup nomresi daxil edin: ");
+            string newNo;
+            bool hasNewNo = false;
+            bool checkNewNo = true;
+            do
+            {
+                if (checkNewNo == false)
+                {
+                    Console.WriteLine("1 boyuk herf ve 3 reqemden ibaret qrup adi daxil edin!");
+                }
+                else if (hasNewNo == true)
+                {
+                    Console.WriteLine("Bu adda qrup var!");
+                    return;
+                }
+                newNo = Console.ReadLine();
+                hasNewNo = course.HasGroupNo(newNo);
+                checkNewNo = Course.CheckGroupNo(newNo);
+            } while (hasNewNo || !checkNewNo);
+            course.EditGroup(oldNo, newNo);
+        }
+        static void StudentsByGroupNo(Course course)
+        {
+            Console.WriteLine("Qrupdaki telebelerin siyahisi");
+            Console.Write("Qrup nomresi: ");
+            string wantedNo;
+            bool hasNo = true;
+            bool checkNo = true;
+            do
+            {
+                if (checkNo == false)
+                {
+                    Console.WriteLine("1 boyuk herf ve 3 reqemden ibaret qrup adi daxil edin!");
+                }
+                else if (hasNo == false)
+                {
+                    Console.WriteLine("Bu adda qrup yoxdur!");
+                    return;
+                }
+                wantedNo = Console.ReadLine();
+                hasNo = course.HasGroupNo(wantedNo);
+                checkNo = Course.CheckGroupNo(wantedNo);
+            } while (!hasNo || !checkNo);
+            course.GetStudentsByGroupNo(wantedNo);
+        }
+        static void AddStudent(Course course)
+        {
+            Console.WriteLine("Telebe elave et");
+            string name;
+            do
+            {
+                Console.Write("Ad: ");
+                name = Console.ReadLine();
+            } while (!name.IsContainsLetter());
+            string surmane;
+            do
+            {
+                Console.Write("Soyad: ");
+                surmane = Console.ReadLine();
+            } while (!surmane.IsContainsLetter());
+
+            Console.Write("Qrup nomresi: ");
+            string no;
+            bool hasNo = true;
+            bool checkNo = true;
+            do
+            {
+                if (checkNo == false)
+                {
+                    Console.WriteLine("1 boyuk herf ve 3 reqemden ibaret qrup adi daxil edin!");
+                }
+                else if (hasNo == false)
+                {
+                    Console.WriteLine("Bu adda qrup yoxdur!");
+                    return;
+                }
+                no = Console.ReadLine();
+                hasNo = course.HasGroupNo(no);
+                checkNo = Course.CheckGroupNo(no);
+            } while (!hasNo || !checkNo);
+
+            Console.Write("Qrup tipi: ");
+            string warranty;
+            do
+            {
+                Console.WriteLine("Asagidaki kateqoriyalardan birini secin: ");
+                foreach (var item in Enum.GetNames(typeof(WarrantyType)))
+                {
+                    Console.WriteLine(item);
+                }
+                warranty = Console.ReadLine();
+
+            } while (!Enum.IsDefined(typeof(WarrantyType), warranty));
+            WarrantyType warrantyType = Enum.Parse<WarrantyType>(warranty);
+
+            Student student = new Student()
+            {
+                Name = name.ToCapitalize(),
+                Surname = surmane.ToCapitalize(),
+                GroupNo = no,
+                Warranty = warrantyType
+            };
+            course.AddStudent(student);
+        }
+        static void DeleteGroup(Course course)
+        {
+            Console.WriteLine("Qrup sil");
+            Console.Write("Qrup nomresi daxil edin: ");
+            string delNo;
+            bool hasNo = true;
+            bool checkNo = true;
+            do
+            {
+                if (checkNo == false)
+                {
+                    Console.WriteLine("1 boyuk herf ve 3 reqemden ibaret qrup adi daxil edin!");
+                }
+                else if (hasNo == false)
+                {
+                    Console.WriteLine("Bu adda qrup yoxdur!");
+                    return;
+                }
+                delNo = Console.ReadLine();
+                hasNo = course.HasGroupNo(delNo);
+                checkNo = Course.CheckGroupNo(delNo);
+            } while (!hasNo || !checkNo);
+            course.RemoveGroupByNo(delNo);
         }
     }
 }
