@@ -27,9 +27,9 @@ namespace CourseManagementLibrary
         public byte CheckLimit()
         {
             if (IsOnline == OnlineType.Online)
-                _limit = 2;
+                _limit = 15;
             else if (IsOnline == OnlineType.Offline)
-                _limit = 1;
+                _limit = 10;
 
             return _limit;
         }
