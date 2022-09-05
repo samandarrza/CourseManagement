@@ -74,7 +74,7 @@ namespace CourseManagementLibrary
         {
             for (int i = 0; i < Groups.Count; i++)
             {
-                if (HasGroupNo(oldNo) && CheckGroupNo(newNo))
+                if (HasGroupNo(oldNo) && CheckGroupNo(newNo) && HasGroupNo(newNo))
                 {
                     _groups[i].No = newNo;
                 }

@@ -36,7 +36,7 @@ namespace CourseManagementLibrary
 
         public void Show()
         {
-            Console.WriteLine($"{No} - {Category} ({IsOnline})");
+            Console.WriteLine($"{No} - {Category} ({IsOnline}) - bos yer:({CheckLimit()- Students.Count})");
         }
 
         public void ShowAllStudent()
