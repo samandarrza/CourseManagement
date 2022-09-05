@@ -60,21 +60,21 @@ namespace CourseManagementLibrary
         {
             for (int i = 0; i < Groups.Count; i++)
             {
-                if (HasGroupNo(oldNo) && CheckGroupNo2(newNo))
+                if (_groups[i].No.Substring(1) == newNo)
                 {
-                    _groups[i].No = oldNo[0] + newNo;
-                }
+                    Console.WriteLine("Bu qrup nomresi var!");
+                    return;
+                }   
             }
+            for (int i = 0; i < Groups.Count; i++)
+                if (HasGroupNo(oldNo) && CheckGroupNo2(newNo))
+                    _groups[i].No = oldNo[0] + newNo;
         }
         public void EditGroup1(string oldNo, string newNo)
         {
             for (int i = 0; i < Groups.Count; i++)
-            {
                 if (HasGroupNo(oldNo) && !HasGroupNo(newNo) && CheckGroupNo(newNo))
-                {
                     _groups[i].No = newNo;
-                }
-            }
         }
         public Group FindGroupByNo(string no)
         {
