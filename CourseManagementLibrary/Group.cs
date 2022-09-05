@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Text.RegularExpressions;
 
 namespace CourseManagementLibrary
 {
@@ -10,35 +9,35 @@ namespace CourseManagementLibrary
     {
         public string No;
         public CategoryType Category;
-        public OnlineType IsOnline;
         private byte _limit;
-
+        private OnlineType _isOnline;
+        public OnlineType IsOnline
+        {
+            get
+            {
+                return _isOnline;
+            }
+            set
+            {
+                if (value == OnlineType.Online)
+                    _limit = 15;
+                else if (value == OnlineType.Offline)
+                    _limit = 10;
+            }
+        }
         public byte Limit { get => _limit; }
-
         public List<Student> Students = new List<Student>(0);
-
         public void AddStudent(Student student)
         {
-            if (Students.Count != CheckLimit() || student.GroupNo == No)
+            if (Students.Count <= Limit || student.GroupNo == No)
             {
                 Students.Add(student);
             }
         }
-        public byte CheckLimit()
-        {
-            if (IsOnline == OnlineType.Online)
-                _limit = 15;
-            else if (IsOnline == OnlineType.Offline)
-                _limit = 10;
-
-            return _limit;
-        }
-
         public void Show()
         {
-            Console.WriteLine($"{No} - {Category} ({IsOnline}) - bos yer:({CheckLimit()- Students.Count})");
+            Console.WriteLine($"{No} - {Category} ({IsOnline}) - bos yer:({Limit - Students.Count})");
         }
-
         public void ShowAllStudent()
         {
             for (int i = 0; i < Students.Count; i++)
@@ -46,7 +45,6 @@ namespace CourseManagementLibrary
                 Students[i].ShowStd();
             }
         }
-
         public void ShowStudentByGroup(string groupno)
         {
             for (int i = 0; i < Students.Count; i++)
@@ -57,7 +55,6 @@ namespace CourseManagementLibrary
                 }
             }
         }
-
         public void Search(string value)
         {
             value = value.ToLower();
@@ -76,6 +73,5 @@ namespace CourseManagementLibrary
                 }
             }
         }
-
     }
 }

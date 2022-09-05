@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Xml.Linq;
 
 namespace CourseManagementLibrary
 {
@@ -20,7 +18,6 @@ namespace CourseManagementLibrary
                 _groups.Add(group);
             }           
         }
-
         public bool HasGroupNo(string no)
         {
             foreach (var item in Groups)
@@ -30,7 +27,6 @@ namespace CourseManagementLibrary
             }
             return false;
         }
-
         public static bool CheckGroupNo(string groupNo)
         {
             if (String.IsNullOrEmpty(groupNo) || !char.IsLetter(groupNo[0]) || !char.IsUpper(groupNo[0]) || groupNo.Length != 4)
@@ -89,7 +85,6 @@ namespace CourseManagementLibrary
             }
             return null;
         }
-
         public void GetAllStudents()
         {
             for (int i = 0; i < Groups.Count; i++)
@@ -98,7 +93,6 @@ namespace CourseManagementLibrary
             }
             
         }
-
         public void GetStudentsByGroupNo(string groupno)
         {
             for (int i = 0; i < Groups.Count; i++)
@@ -109,7 +103,6 @@ namespace CourseManagementLibrary
                 }   
             }
         }
-
         public void RemoveGroupByNo(string no)
         {
             for (int i = 0; i < Groups.Count; i++)
@@ -120,7 +113,6 @@ namespace CourseManagementLibrary
                 }
             }
         }
-
         public void Search(string value)
         {
             for (int i = 0; i < Groups.Count; i++)

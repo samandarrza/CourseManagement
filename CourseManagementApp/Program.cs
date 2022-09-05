@@ -1,7 +1,6 @@
 ﻿using CourseManagementLibrary;
 using CourseManagementLibrary.Enums;
 using System;
-using System.Reflection.Metadata;
 
 namespace CourseManagementApp
 {
@@ -290,7 +289,7 @@ namespace CourseManagementApp
             } while (!hasNo || !checkNo);
 
             Group StudentGroup = course.FindGroupByNo(no);
-            if (StudentGroup.Students.Count == StudentGroup.CheckLimit())
+            if (StudentGroup.Students.Count == StudentGroup.Limit)
             {
                 Console.WriteLine("Qrup doludur!");
                 return;

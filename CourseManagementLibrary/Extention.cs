@@ -18,7 +18,6 @@ namespace CourseManagementLibrary
             }
             return newStr;
         }
-
         public static bool IsContainsLetter(this string value)
         {
             for (int i = 0; i < value.Length; i++)
