@@ -196,7 +196,7 @@ namespace CourseManagementApp
                 hasNewNo = course.HasGroupNo(newNo);
                 checkNewNo = Course.CheckGroupNo(newNo);
             } while (hasNewNo || !checkNewNo);
-            course.EditGroup(oldNo, newNo);
+            course.EditGroup1(oldNo, newNo);
         }
         static void EditGrp2(Course course)
         {

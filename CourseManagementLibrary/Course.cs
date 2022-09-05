@@ -66,11 +66,11 @@ namespace CourseManagementLibrary
                 }
             }
         }
-        public void EditGroup(string oldNo, string newNo)
+        public void EditGroup1(string oldNo, string newNo)
         {
             for (int i = 0; i < Groups.Count; i++)
             {
-                if (HasGroupNo(oldNo) && CheckGroupNo(newNo) && HasGroupNo(newNo))
+                if (HasGroupNo(oldNo) && !HasGroupNo(newNo) && CheckGroupNo(newNo))
                 {
                     _groups[i].No = newNo;
                 }

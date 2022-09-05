@@ -8,7 +8,7 @@ namespace CourseManagementLibrary
     {
         List<Group> Groups { get; }
         public void AddGroup(Group group);
-        public void EditGroup(string oldNo, string newNo);
+        public void EditGroup1(string oldNo, string newNo);
         public void AddStudent(Student student);
         public void GetStudentsByGroupNo(string groupNo);
         public void GetAllStudents();
